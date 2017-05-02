@@ -121,6 +121,9 @@ class LogStash::Inputs::Beats < LogStash::Inputs::Base
   # Close Idle clients after X seconds of inactivity.
   config :client_inactivity_timeout, :validate => :number, :default => 60
 
+  # Save remote ip address in 'host' field (instead of defaultly copying beat.hostname into it)
+  config :save_remote_ip, :validate => :boolean, :default => false
+
   def register
     # For Logstash 2.4 we need to make sure that the logger is correctly set for the
     # java classes before actually loading them.

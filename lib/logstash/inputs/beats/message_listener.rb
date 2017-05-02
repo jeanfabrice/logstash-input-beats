@@ -29,6 +29,10 @@ module LogStash module Inputs class Beats
     def onNewMessage(ctx, message)
       hash = message.getData()
 
+      if input.save_remote_ip
+        hash.put('host',ctx.channel().remoteAddress().getAddress().getHostAddress())
+      end
+
       target_field = extract_target_field(hash)
 
       if target_field.nil?
